@@ -146,3 +146,26 @@ let exclusivePremissions = authorRole.symmetricDifference(contributorRole)
 
 var sourceSet: Set = [1, 2, 3]
 var destSet: Set = [2, 1, 3]
+
+var isEqual = sourceSet == destSet
+
+let contactResource = authorRole
+let userBob = subscriberRole
+let userSally = authorRole
+
+if userBob.isSuperset(of: fooResource) {
+    print("Access granted")
+} else {
+    print("Access denied")
+}
+
+
+if userSally.isSuperset(of: fooResource) {
+    print("Access granted")
+} else {
+    print("Access denied")
+}
+
+authorRole.isDisjoint(with: editorRole)
+
+editorRole.isSubset(of: adminRole)
