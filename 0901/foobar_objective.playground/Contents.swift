@@ -48,3 +48,7 @@ extension Particle {
     }
 }
 
+// testParticle을 초기화 하고자 할 때, test.jpg라는 이름의 이미지 파일을 찾을 수 없음에 따라, testParticle은 nil이 됨...
+//var testParticle = Particle(name: "test", symbol: "t", statistics: "test", imageName: "test.jpg")
+
+
