@@ -27,3 +27,34 @@ if let testArrayMixed: [Int] = mixedNSArray as? [Int] {
     // false
  
 }
+
+
+// 프로토콜 작성 문법
+
+protocol TestParticle {
+    var name: String { get }
+    func particalAsImage() -> NSImage
+}
+
+// protocol extension. 소스코드 작성자가 아니더라도 기존 프로토콜의 기능을 확장 할 수 있다
+extension Collection {
+    func encryptElements(salt: String) -> [Iterator.Element] {
+        guard !salt.isEmpty else { return [] }
+        guard self.count > 0 else { return [] }
+        var index = self.startIndex
+        var result: [Iterator.Element] = []
+        repeat {
+            let el = self[index]
+            result.append(el)
+            // index = index.successor()
+            index = self.index(after: startIndex)
+            
+        }while (index != self.endIndex)
+            return result
+        
+    }
+}
+
+var myArr = [String]()
+myArr.append("foo")
+var result = myArr.encryptElements(salt: "test")
