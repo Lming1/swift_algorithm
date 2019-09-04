@@ -49,6 +49,36 @@ extension Particle {
 }
 
 // testParticle을 초기화 하고자 할 때, test.jpg라는 이름의 이미지 파일을 찾을 수 없음에 따라, testParticle은 nil이 됨...
-//var testParticle = Particle(name: "test", symbol: "t", statistics: "test", imageName: "test.jpg")
+var testParticle = Particle(name: "test", symbol: "t", statistics: "test", imageName: "test.jpg")
+
+//SOLID 원칙 중, 단일 책임, 의존성 도치 위배
+//NSImage 클래스 정보를 얻기 위해 구조체를 서로 연결시킴.
+//초기화가 진행되는 동안 요소의 생성에 관여하려한 점
+// NSImage 클래스에서 외부 변화에 영향을 받을 수 있는 가능성을 열어뒀다는 점.
+// 사용자 입장에서 이미지를 표시할 때 NSImage에 의존된다는 사실도 알 수 없도록 한 점..
+
+
+public struct TestParticle {
+    private var name: String
+    private var symbol: String
+    private var statistics: String
+    private var image: NSImage
+    
+    public init(name: String, symbol: String, statistics: String, image: NSImage) {
+        self.name = name
+        self.symbol = symbol
+        self.statistics = statistics
+        self.image = image
+    }
+}
+
+extension TestParticle {
+    public func particalAsImage() -> NSImage {
+        return self.image
+    }
+}
+
+
+
 
 
