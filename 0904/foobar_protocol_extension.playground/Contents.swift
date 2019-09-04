@@ -28,3 +28,11 @@ var test3 = Particle(name: "test3", symbol: "e", statistics: "test3")
 var particleList = [test1, test2, test3]
 
 
+// iterator
+
+public protocol IteratorProtocol {
+    associatedtype Element
+    mutating func next() -> Self.Element?
+}
+
+// sequence
