@@ -3,16 +3,6 @@
 import Cocoa
 
 
-public protocol IteratorProtocol {
-    associatedtype Element
-    mutating func next() -> Self.Element?
-}
-
-public protocol Sequence {
-    associatedtype Iterator : IteratorProtocol
-    func makeIterator() -> Self.Iterator
-}
-
 
 
 
@@ -49,19 +39,6 @@ public struct Stack<T> {
 }
 
 
-var testStack = Stack<Int>()
-
-testStack.push(element: 5)
-
-testStack.push(element: 44)
-
-testStack.push(element: 23)
-
-var x = testStack.pop()
-var stackCount = testStack.count
-x = testStack.pop()
-
-x = testStack.pop()
 
 
 
@@ -78,11 +55,7 @@ extension Stack: CustomStringConvertible, CustomDebugStringConvertible {
 }
 
 // 스택 초기화시 배열처럼 동작하게
-extension Stack: ExpressibleByArrayLiteral {
-    public init(arrayLiteral elements: T...) {
-        self.init(elements)
-    }
-}
+
 
 public struct ArrayIterator<T> : IteratorProtocol {
     var currentElement: [T]
@@ -99,7 +72,17 @@ public struct ArrayIterator<T> : IteratorProtocol {
 }
 
 extension Stack: Sequence {
-    public func makeIterator() -> ArrayIterator<T> {
-        return ArrayIterator<T>(elements: self.elements)
+    public func makeIterator() -> AnyIterator<T> {
+        return AnyIterator(IndexingIterator(_elements: self.elements.reversed()))
     }
+    
+    public init<S : Sequence> (_ s: S) where S.Iterator.Element == T {
+        self.elements = Array(s.reversed())
+    }
+    
 }
+
+
+var testStack = [4,5,6,7]
+
+var testStackFromStack = Stack<Int>(testStack)
