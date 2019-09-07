@@ -54,9 +54,6 @@ extension Stack: CustomStringConvertible, CustomDebugStringConvertible {
     }
 }
 
-// 스택 초기화시 배열처럼 동작하게
-
-
 public struct ArrayIterator<T> : IteratorProtocol {
     var currentElement: [T]
     init(elements: [T]) {
@@ -86,3 +83,8 @@ extension Stack: Sequence {
 var testStack = [4,5,6,7]
 
 var testStackFromStack = Stack<Int>(testStack)
+
+
+
+
+
