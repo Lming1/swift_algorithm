@@ -63,11 +63,11 @@ public struct CircularBuffer<T> {
         // count만큼 2를 거듭제곱으로 함.
         
         if((capacity & (~capacity + 1)) != capacity) {
-            var i = 1
-            while (i < capacity) {
-                i = i << 1
+            var b = 1
+            while (b < capacity) {
+                b = b << 1
             }
-            capacity = i
+            capacity = b
         }
         
         data = [T]()
@@ -166,5 +166,58 @@ public struct CircularBuffer<T> {
     }
    
     
+    
+}
+
+// 만들었으니 선언해서 사용해보자 (4는 동작이 잘되는데..)
+
+//var circleBuffer = CircularBuffer<Int>(4)
+//
+//circleBuffer.push(element: 100)
+//circleBuffer.push(element: 200)
+//circleBuffer.push(element: 300)
+//circleBuffer.push(element: 400)
+//circleBuffer.push(element: 500)
+//circleBuffer.push(element: 600)
+//circleBuffer.push(element: 700)
+
+extension CircularBuffer: CustomStringConvertible, CustomDebugStringConvertible {
+    public var description: String {
+        return data.description
+    }
+    
+    public var debugDescription: String {
+        return data.debugDescription
+    }
+}
+
+
+
+
+
+
+// 2, 4, 8.. 이런 사이즈만 인식함. 현재 옵션은 갱신되지 않게 무시.
+var circleBuffer = CircularBuffer<Int>(8, overwriteOperation: CircularBufferOperation.Ignore)
+
+circleBuffer.push(element: 100)
+circleBuffer.push(element: 200)
+circleBuffer.push(element: 300)
+circleBuffer.push(element: 400)
+circleBuffer.push(element: 500)
+
+circleBuffer.push(element: 600)
+circleBuffer.push(element: 600)
+circleBuffer.push(element: 600)
+circleBuffer.push(element: 600)
+circleBuffer.push(element: 600)
+let cnt = circleBuffer.count
+
+
+// 배열 리터럴 문법 사용 추가
+
+extension CircularBuffer: ExpressibleByArrayLiteral {
+    public init(arrayLiteral elements: T...) {
+        self.init(elements, size: elements.count)
+    }
     
 }
