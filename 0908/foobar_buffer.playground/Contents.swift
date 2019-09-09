@@ -221,3 +221,6 @@ extension CircularBuffer: ExpressibleByArrayLiteral {
     }
     
 }
+
+var testBuffer: CircularBuffer<Int> = [1,2,3,4]
+testBuffer.push(element: 100)
