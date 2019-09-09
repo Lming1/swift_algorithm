@@ -224,3 +224,33 @@ extension CircularBuffer: ExpressibleByArrayLiteral {
 
 var testBuffer: CircularBuffer<Int> = [1,2,3,4]
 testBuffer.push(element: 100)
+
+
+
+
+// for..in extention
+
+extension CircularBuffer: Sequence {
+    public func makeIterator() -> AnyIterator<T> {
+        var newData = [T]()
+        
+        if count > 0 {
+            newData = [T](repeating: data[head], count: count)
+            if head > tail {
+                // 처음 절반에 해당하는 요소의 수 복사
+                let front = data.capacity - head
+                newData[0..<front] = data[head..<data.capacity]
+                
+                if front < count {
+                    newData[front + 1..<newData.capacity] = data[0..<count - front]
+                }
+            } else {
+                newData[0..<tail - head] = data[head..<tail]
+            }
+        }
+        return AnyIterator(IndexingIterator(_elements: newData.lazy))
+    }
+}
+
+
+
