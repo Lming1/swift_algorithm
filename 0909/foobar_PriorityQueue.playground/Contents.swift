@@ -106,3 +106,62 @@ public struct PriorityQueue<T: Comparable> {
         }
     }
 }
+
+
+var priorityQueue = PriorityQueue<String>(ascending: true, startingValues: ["test", "queue", "abc"])
+
+
+var test = priorityQueue.pop()
+
+
+extension PriorityQueue: CustomStringConvertible, CustomDebugStringConvertible {
+    public var description: String {
+        return heap.description
+    }
+    
+    public var debugDescription: String {
+        return heap.debugDescription
+    }
+}
+
+
+extension PriorityQueue: IteratorProtocol {
+    public typealias Element = T
+    public mutating func next() -> Element? {
+        return pop()
+    }
+}
+
+extension PriorityQueue: Sequence {
+    public typealias Iterator = PriorityQueue
+    public func makeIterator() -> Iterator {
+        return self
+    }
+}
+
+
+for value in priorityQueue {
+    print(value)
+}
+
+// 서브스크립트 배열 정의
+
+extension PriorityQueue: Collection {
+    public typealias Index = Int
+    
+    public var startIndex: Int {
+        return heap.startIndex
+    }
+    
+    public var endIndex: Int {
+        return heap.endIndex
+    }
+    
+    public subscript(i: Int) -> T {
+        return heap[i]
+    }
+    
+    public func index(after i: Int) -> Int {
+        return heap.index(after: i)
+    }
+}
