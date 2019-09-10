@@ -148,7 +148,7 @@ extension LinkedList: Sequence {
 }
 
 var testLinkedList = [1,2,3,4]
-
+// 값이 뭔가 이상한데..
 var testList = LinkedList<Int>(testLinkedList)
 
 testList.push(element: 55)
