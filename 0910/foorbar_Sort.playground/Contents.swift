@@ -74,3 +74,5 @@ private func merge<T: Comparable>(_ leftHalf: [T], rightHalf: [T]) -> [T] {
 
 var testList = [1, 14, 9, 81, 3, 2, 7]
 mergeSort(testList)
+
+
