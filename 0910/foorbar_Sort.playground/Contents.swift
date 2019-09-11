@@ -76,3 +76,23 @@ var testList = [1, 14, 9, 81, 3, 2, 7]
 mergeSort(testList)
 
 
+
+// Quick Sort
+// Lomuto Partitoning Scheme
+// O(nlogn)
+// 최악 : O(n^)
+// Pivot 선택 여부에 따라 알고리즘 성능이 크게 차이남.
+
+
+public func quickSort<T: Comparable> (_ list: inout [T], low: Int, high: Int) {
+    if low < high {
+        let pivot = partition(&list, low: low, high: high)
+        
+        quickSort(&list, low: low, high: pivot - 1)
+        quickSort(&list, low: pivot + 1, high: high)
+    }
+}
+
+private func partition<T: Comparable> (_ list: inout [T], low: Int, high: Int) -> Int{
+    return 0
+}

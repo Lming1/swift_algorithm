@@ -200,6 +200,8 @@ private func merge<T: Comparable>(left: Node<T>?, right: Node<T>?) -> Node<T>?{
     return result
 }
 
+
+// Linked List 반으로 나누기 위해.
 private func frontBackSplit<T: Comparable> (list: inout LinkedList<T>, front: inout Node<T>?, back: inout Node<T>?)  {
     
     var fast: Node<T>?
